@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -182,6 +183,23 @@ namespace HW8
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void CloseApp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                while(mainTabControl.Items.Count > 0)
+                    CloseTab_Click(sender, e);
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CloseApp_Click(e, null);
         }
 
 

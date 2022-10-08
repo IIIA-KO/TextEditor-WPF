@@ -12,7 +12,7 @@
     MinHeight="450"
     Icon="/Resources/files_text.ico"
     Loaded="Window_Loaded"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Closing="Window_Closing">
 
     <Window.Resources>
         <ContextMenu x:Key="MainWindowContextMenu">
@@ -56,7 +56,10 @@
                     Click="NewTabButton_Click"
                     Header="Відкрити нову вкладку"
                     InputGestureText="Ctrl+Shift+N" />
-                <MenuItem Header="Вихід" InputGestureText="Alt+F4" />
+                <MenuItem
+                    Click="CloseApp_Click"
+                    Header="Вихід"
+                    InputGestureText="Alt+F4" />
             </MenuItem>
 
             <MenuItem Header="_Редагувати">
