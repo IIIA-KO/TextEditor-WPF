@@ -1,0 +1,183 @@
+﻿<Window
+    x:Class="HW8.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HW8"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title=""
+    Width="800"
+    Height="450"
+    MinWidth="800"
+    MinHeight="450"
+    Icon="/Resources/files_text.ico"
+    Loaded="Window_Loaded"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ContextMenu x:Key="MainWindowContextMenu">
+            <MenuItem Header="_Редагувати">
+                <MenuItem
+                    Click="Copy_Click"
+                    Header="Копіювати"
+                    InputGestureText="Ctrl+C" />
+                <MenuItem
+                    Click="Paste_Click"
+                    Header="Вставити"
+                    InputGestureText="Ctrl+V" />
+                <MenuItem
+                    Click="Cut_Click"
+                    Header="Вирізати"
+                    InputGestureText="Ctrl+X" />
+                <MenuItem
+                    Click="SelectAll_Click"
+                    Header="Виділити все"
+                    InputGestureText="Ctrl+A" />
+                <MenuItem Header="Назад" InputGestureText="Ctrl+Z" />
+            </MenuItem>
+        </ContextMenu>
+    </Window.Resources>
+
+    <DockPanel>
+        <Menu
+            DockPanel.Dock="Top"
+            FontSize="15"
+            IsMainMenu="True">
+            <MenuItem Header="_Файл">
+                <MenuItem
+                    Click="OpenTextFile_Click"
+                    Header="Відкрити"
+                    InputGestureText="Ctrl+O" />
+                <MenuItem
+                    Click="SaveAsFile_Click"
+                    Header="Зберегти як"
+                    InputGestureText="Ctrl+Shift+S" />
+                <MenuItem
+                    Click="NewTabButton_Click"
+                    Header="Відкрити нову вкладку"
+                    InputGestureText="Ctrl+Shift+N" />
+                <MenuItem Header="Вихід" InputGestureText="Alt+F4" />
+            </MenuItem>
+
+            <MenuItem Header="_Редагувати">
+                <MenuItem
+                    Click="Copy_Click"
+                    Header="Копіювати"
+                    InputGestureText="Ctrl+C" />
+                <MenuItem
+                    Click="Paste_Click"
+                    Header="Вставити"
+                    InputGestureText="Ctrl+V" />
+                <MenuItem
+                    Click="Cut_Click"
+                    Header="Вирізати"
+                    InputGestureText="Ctrl+X" />
+                <MenuItem
+                    Click="SelectAll_Click"
+                    Header="Виділити все"
+                    InputGestureText="Ctrl+A" />
+                <MenuItem
+                    Click="Undo_Click"
+                    Header="Скасувати"
+                    InputGestureText="Ctrl+Z" />
+            </MenuItem>
+
+            <MenuItem Header="_Вигляд">
+                <MenuItem Header="Масштаб">
+                    <MenuItem Click="ZoomIn_Click" Header="Збільшити" />
+                    <MenuItem Click="ZoomOutClick" Header="Зменшити" />
+                    <MenuItem Click="ZoomByDefault" Header="За замовчуванням" />
+                </MenuItem>
+                <MenuItem Header="Змінити шрифт">
+                    <MenuItem Click="TimewNewRomanFont" Header="Times New Roman" />
+                    <MenuItem Click="BadScriptFont" Header="Bad Script" />
+                    <MenuItem Click="ComicSansMSFont" Header="Comic Sans MS" />
+                    <MenuItem Click="CascadiaMonoFont" Header="Cascadia Mono" />
+                    <MenuItem Click="DefaultFont" Header="За замовчуванням" />
+                </MenuItem>
+                <MenuItem Header="Кольорова палітра">
+                    <MenuItem Header="Змінити колір шрифту">
+                        <MenuItem Click="ForeroundChoose" Header="Обрати" />
+                        <MenuItem Click="ForeroundDefault" Header="За замовчуванням" />
+                    </MenuItem>
+                    <MenuItem Header="Змінити колір фону">
+                        <MenuItem Click="BackgroundChoose" Header="Обрати" />
+                        <MenuItem Click="BackgroundDefault" Header="За замовчуванням" />
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <ToolBar DockPanel.Dock="Top">
+            <Button
+                x:Name="NewTabButton"
+                Width="30"
+                Height="30"
+                Click="NewTabButton_Click"
+                ToolTip="Нова вкладка">
+                <Image Source="/Resources/plus.png" />
+            </Button>
+
+            <Button
+                x:Name="OpenFileButton"
+                Width="30"
+                Height="30"
+                Click="OpenTextFile_Click"
+                ToolTip="Відкрити текстовий файл">
+                <Image Source="/Resources/folder.png" />
+            </Button>
+
+            <Button
+                x:Name="SaveFileButton"
+                Width="30"
+                Height="30"
+                Click="SaveAsFile_Click"
+                ToolTip="Зберегти як">
+                <Image Source="/Resources/diskette.png" />
+            </Button>
+
+            <Button
+                x:Name="CloseTabButton"
+                Width="25"
+                Height="25"
+                Click="CloseTab_Click"
+                ToolTip="Закрити вкладку">
+                <Image Source="/Resources/close.png" />
+            </Button>
+        </ToolBar>
+
+        <StatusBar
+            x:Name="bar"
+            Height="20"
+            DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="Line: " />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding Line}" />
+            </StatusBarItem>
+            <StatusBarItem />
+            <TextBlock Text="Column: " />
+            <StatusBarItem>
+                <TextBlock Text="{Binding Column}" />
+            </StatusBarItem>
+
+            <StatusBarItem Width="130" HorizontalAlignment="Right">
+                <TextBlock
+                    Width="120"
+                    FontSize="12"
+                    Text="{Binding Time, StringFormat=dd-MM-yyyy HH:mm:ss}" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <TabControl x:Name="mainTabControl" FontSize="15">
+            <TabItem Header="TextFile1" IsSelected="True">
+                <TextBox
+                    AcceptsReturn="True"
+                    AcceptsTab="True"
+                    PreviewTextInput="TextBox_PreviewTextInput"
+                    TextWrapping="Wrap" />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

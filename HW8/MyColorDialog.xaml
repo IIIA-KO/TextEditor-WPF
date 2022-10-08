@@ -1,0 +1,134 @@
+﻿<Window
+    x:Class="HW8.MyColorDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HW8"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MyColorDialog"
+    Width="800"
+    Height="450"
+    MinWidth="800"
+    MinHeight="450"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <local:RGBToColorConverter x:Key="ColorConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="15*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <MultiBinding Converter="{StaticResource ColorConverter}">
+                <Binding ElementName="RedSlider" Path="Value" />
+                <Binding ElementName="GreenSlider" Path="Value" />
+                <Binding ElementName="BlueSlider" Path="Value" />
+            </MultiBinding>
+        </Grid.Background>
+
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="30"
+            Text="R:" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="30"
+            Text="G:" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="30"
+            Text="B:" />
+
+        <Slider
+            x:Name="RedSlider"
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Maximum="255"
+            Minimum="0" />
+        <Slider
+            x:Name="GreenSlider"
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Maximum="255"
+            Minimum="0" />
+        <Slider
+            x:Name="BlueSlider"
+            Grid.Row="2"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Maximum="255"
+            Minimum="0" />
+
+        <TextBox
+            x:Name="RedTB"
+            Grid.Row="0"
+            Grid.Column="2"
+            Width="100"
+            Height="60"
+            Text="{Binding ElementName=RedSlider, Path=Value, StringFormat=N0}"
+            TextAlignment="Center" />
+        <TextBox
+            x:Name="GreenTB"
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="100"
+            Height="60"
+            Text="{Binding ElementName=GreenSlider, Path=Value, StringFormat=N0}"
+            TextAlignment="Center" />
+        <TextBox
+            x:Name="BlueTB"
+            Grid.Row="2"
+            Grid.Column="2"
+            Width="100"
+            Height="60"
+            Text="{Binding ElementName=BlueSlider, Path=Value, StringFormat=N0}"
+            TextAlignment="Center" />
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.ColumnSpan="3"
+            Orientation="Horizontal">
+            <Button
+                x:Name="OKButton"
+                Width="150"
+                Height="80"
+                Margin="110,0"
+                Click="OKButton_Click"
+                Content="OK"
+                FontSize="20" />
+            <Button
+                x:Name="CancelButton"
+                Width="150"
+                Height="80"
+                Margin="170,0"
+                Click="CancelButton_Click"
+                Content="Відмінити"
+                FontSize="20" />
+        </StackPanel>
+
+    </Grid>
+</Window>
